@@ -1,3 +1,7 @@
 import { StyleSheet } from "react-native";
 
-const GlobalStyles = StyleSheet.create({});
+export const GlobalStyles = StyleSheet.create({
+  BackGroundNavandFon: {
+    NavSFon: "#01140c",
+  },
+});

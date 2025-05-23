@@ -42,22 +42,21 @@ const layout = () => {
         tabBarItemStyle: {
           display: "flex",
           flexDirection: "row",
-          width: "25%",
-          height: "100%",
           alignItems: "center",
-          justifyContent: "center",
-        },
-        tabBarStyle: {
-          backgroundColor: "#0d111f",
-          borderRadius: 0,
           height: 52,
           width: "100%",
-          borderWidth: 1,
-          borderColor: "red",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 100,
+          marginHorizontal: "auto",
         },
+        tabBarStyle: {
+          backgroundColor: "#01140c",
+          height: 100,
+          width: "100%",
+          alignItems: "baseline",
+          justifyContent: "center",
+          borderWidth: 0,
+          borderColor: "#01140c",
+        },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen
@@ -132,33 +131,32 @@ export default layout;
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     flexDirection: "row",
     height: 52,
-    width: "100%",
-    gap: 5,
+    width: 100,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 0,
+    gap: 10,
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#E0E7FF",
     fontWeight: "semibold",
   },
   NotFocusedContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
+    width: 100,
+    height: 52,
   },
   IconsSourse: {
-    width: 20,
-    height: 20,
+    width: 16,
+    height: 16,
     color: "white",
   },
   Block: {
     height: 52,
-    width: "100%",
-    borderWidth: 5,
-    borderColor: "Green",
+    width: 100,
   },
 });
