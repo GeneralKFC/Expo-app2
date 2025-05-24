@@ -46,6 +46,7 @@ const layout = () => {
           height: 52,
           width: "100%",
           marginHorizontal: "auto",
+          backgroundColor: "#01140c",
         },
         tabBarStyle: {
           backgroundColor: "#01140c",

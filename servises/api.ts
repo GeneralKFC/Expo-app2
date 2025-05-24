@@ -6,8 +6,10 @@ export const TMDB_CONFIG = {
     Authorization: `Bearer ${process.env.EXPO_PUBLIC_MOVIE_API_KEY}`,
   },
 };
-export const fetchMOvies = async ({ query }: { query: string }) => {
-  const endpoint = "/discover/movie";
+export const fetchMovies = async ({ query }: { query: string }) => {
+  const endpoint = query
+    ? `${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+    : `${TMDB_CONFIG.BASE_URL}/discover/movie`;
 
   const res = await fetch(endpoint, {
     method: "GET",
