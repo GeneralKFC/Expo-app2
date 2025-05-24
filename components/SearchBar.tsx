@@ -3,8 +3,10 @@ import { Image, StyleSheet, TextInput, View } from "react-native";
 interface Props {
   placeholder: string;
   onPress?: () => void;
+  value: string;
+  onChangeText: (text: string) => void;
 }
-const SearchBar = ({ placeholder, onPress }: Props) => {
+const SearchBar = ({ placeholder, onPress, value, onChangeText }: Props) => {
   return (
     <View style={styles.container}>
       <Image
@@ -13,9 +15,9 @@ const SearchBar = ({ placeholder, onPress }: Props) => {
         source={require("@/assets/icons/search.png")}
       />
       <TextInput
-        value=""
+        value={value}
         onPress={onPress}
-        onChangeText={() => {}}
+        onChangeText={onChangeText}
         placeholder={placeholder}
         style={styles.Input}
         placeholderTextColor="black"

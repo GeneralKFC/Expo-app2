@@ -39,7 +39,9 @@ const MovieCard = ({
           <Text style={styles.CardRating}>{vote_average}</Text>
         </View>
         <View style={styles.CardRealize}>
-          <Text style={styles.CardRealizeDateText}>{release_date}</Text>
+          <Text style={styles.CardRealizeDateText}>
+            {release_date.split("-")[0]}
+          </Text>
         </View>
       </TouchableOpacity>
     </Link>

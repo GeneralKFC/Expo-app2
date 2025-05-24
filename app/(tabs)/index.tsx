@@ -45,6 +45,8 @@ export default function Index() {
         ) : (
           <View style={styles.ItemsContainer2}>
             <SearchBar
+              value=""
+              onChangeText={() => {}}
               onPress={() => router.push("/search")}
               placeholder="Search for a movie"
             />
@@ -59,7 +61,7 @@ export default function Index() {
                 width: "100%",
                 //borderWidth: 1,
                 alignItems: "flex-start",
-                justifyContent: "space-between",
+                justifyContent: "space-around",
                 //borderColor: "red",
                 marginBottom: 20,
               }}
