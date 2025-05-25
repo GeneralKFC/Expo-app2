@@ -1,6 +1,8 @@
 import MovieCard from "@/components/MOvieCard";
 import SearchBar from "@/components/SearchBar";
+import TrendingCard from "@/components/TrendingCard";
 import { fetchMovies } from "@/servises/api";
+import { getTrendingMovies } from "@/servises/appWrite";
 import useFetch from "@/servises/useFetch";
 import { useRouter } from "expo-router";
 import {
@@ -15,10 +17,16 @@ import {
 export default function Index() {
   const router = useRouter();
   const {
+    data: trendingMovies,
+    loading: trendingLoading,
+    error: trendingError,
+  } = useFetch(getTrendingMovies);
+  const {
     data: movies,
     loading: moviesLoading,
     error: moviesError,
   } = useFetch(() => fetchMovies({ query: "" }));
+  // console.log(trendingMovies);
   return (
     <View style={styles.container}>
       <Image
@@ -34,22 +42,37 @@ export default function Index() {
         style={styles.ItemscContainer}
       >
         <Image style={styles.Logo} source={require("@/assets/images/1.png")} />
-        {moviesLoading ? (
+        {moviesLoading && trendingLoading ? (
           <ActivityIndicator
             style={styles.moviesLoading}
             size="large"
             color="white"
           />
-        ) : moviesError ? (
-          <Text>Error:{moviesError?.message}</Text>
+        ) : moviesError && trendingError ? (
+          <Text>Error:{moviesError?.message || trendingError?.message}</Text>
         ) : (
           <View style={styles.ItemsContainer2}>
             <SearchBar
-              value=""
-              onChangeText={() => {}}
               onPress={() => router.push("/search")}
               placeholder="Search for a movie"
             />
+            {trendingMovies && (
+              <View style={styles.TrendingMovie_container}>
+                <Text style={styles.TrendingMovie_header}>Trending Movies</Text>
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  ItemSeparatorComponent={() => (
+                    <View style={styles.cont}></View>
+                  )}
+                  renderItem={({ item, index }) => (
+                    <TrendingCard movie={item} index={index} />
+                  )}
+                  data={trendingMovies}
+                  keyExtractor={(item) => item.movie_id}
+                ></FlatList>
+              </View>
+            )}
             <Text style={styles.NotFoundMOvieText}>Latest Movies</Text>
 
             <FlatList
@@ -131,5 +154,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     // borderWidth: 1,
     //borderColor: "red",
+  },
+  TrendingMovie_container: {
+    width: "100%",
+    marginTop: 20,
+    //borderWidth: 1,
+    //borderColor: "red",
+  },
+  TrendingMovie_header: {
+    color: "white",
+    fontSize: 25,
+    justifyContent: "flex-start",
+    marginBottom: 10,
+    fontWeight: "semibold",
+  },
+  FlatList_Title: {
+    color: "white",
+  },
+  cont: {
+    width: 12,
   },
 });

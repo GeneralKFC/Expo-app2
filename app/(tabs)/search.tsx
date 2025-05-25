@@ -1,6 +1,7 @@
 import MovieCard from "@/components/MOvieCard";
 import SearchBar from "@/components/SearchBar";
 import { fetchMovies } from "@/servises/api";
+import { updateSearchCount } from "@/servises/appWrite";
 import useFetch from "@/servises/useFetch";
 import React, { useEffect, useState } from "react";
 import {
@@ -13,7 +14,6 @@ import {
 } from "react-native";
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [notMovies, setNotMovies] = useState<boolean>(false);
   const {
     data: movies,
     loading: moviesLoading,
@@ -31,6 +31,11 @@ const Search = () => {
     }, 500);
     return () => clearTimeout(timeOutId);
   }, [searchQuery]);
+  useEffect(() => {
+    if (movies?.length > 0 && movies?.[0]) {
+      updateSearchCount(searchQuery, movies[0]);
+    }
+  }, [movies]);
   return (
     <View style={styles.container}>
       <Image
